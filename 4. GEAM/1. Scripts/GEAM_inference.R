@@ -5,10 +5,10 @@ library(MASS) # statistic library with lm function for linear regression
 library(raster) # for spacial (raster) data
 
 # my functions 
-source("C:/Users/Alicia/Desktop/AntropoGeo/GEAM_inference_functions.R")
+source("./GEAM_inference_functions.R")
 
 # set working directory 
-setwd("C:/Users/Alicia/Desktop/AntropoGeo")
+setwd("")
 
 # charge input tables with 1000 random samples 
 load("1000_random_SNPs_gen1.RData")
@@ -33,7 +33,7 @@ for(i in 1 : length(gs1)){
 }
 
 # save table with AIC and Adj_Rsq for each model 
-setwd("Master-Thesis-MBC/7. GEAM and distribution range inference/Results/1. Searching the best model")
+#setwd("")
 write.table(res, "AIC_adjRsq.txt", row.names=FALSE, quote=F, sep="\t")
 
 # save plots of AIC and Adj_Rsq distributions
@@ -44,12 +44,10 @@ plots_save(Label="G1EAM_rad", var="AIC")
 plots_save(Label="G1EAM_th", var="AIC")
 plots_save(Label="G1EAM_ele", var="AIC")
 
-
-
 # 2. Obtaining the best model
 # select the regression model with the lowest value of AIC for each environmental variable and genomic database (6 models)
 
-setwd("Master-Thesis-MBC/7. GEAM and distribution range inference/Results/2. Best model/")
+#setwd("")
 bg_results <- best_GEAM()
 
 # save results of the obtained models in table format 
@@ -92,13 +90,13 @@ for(i in 1:nrow(extremes)){
 }
 
 # open rasters of environmental variables to plot the distribution range 
-setwd("Master-Thesis-MBC/1. Environmental data retrieval/Environmental rasters")
+#setwd("")
 rrad <- raster("rad.tif")
 rth <- raster("th.tif")
 rele <- raster("ele.tif")
 
 # working directory to save range distribution inference plot results 
-setwd("Master-Thesis-MBC/7. GEAM and distribution range inference/Results/2. Best model")
+setwd("")
 
 # function to plot distribution range
 # needs to be debugged
