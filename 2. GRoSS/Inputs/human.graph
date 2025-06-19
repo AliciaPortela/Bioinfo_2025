@@ -1,0 +1,53 @@
+root	r		
+label	CLM	CLM	
+label	PUR	PUR	
+label	FRN	FRN	
+label	SAR	SAR	
+label	ADY	ADY	
+label	RUS	RUS	
+label	ESN	ESN	
+label	MZB	MZB	
+label	HZP	HZP	
+label	KLS	KLS	
+label	MAN	MAN
+label	MSL	MSL
+label	IBS	IBS
+label	BAS	BAS
+label	PEL	PEL
+label	PTH	PTH
+label	CEU	CEU
+label	MXL	MXL 	
+edge	r_a	r	a
+edge	a_b	a	b
+edge	a_MAN	a	MAN
+edge	b_MSL	b	MSL
+edge	b_ESN	b	ESN
+edge	r_c	r	c
+edge	c_PUR	c	PUR
+edge	c_d	c	d
+edge	d_e	d	e
+edge	e_CEU	e	CEU
+edge	e_f	e	f
+edge	f_FRN	f	FRN
+edge	f_g	f	g
+edge	g_SAR	g	SAR
+edge	g_h	g	h
+edge	h_BAS	h	BAS
+edge	h_MXL	h	MXL
+edge	d_i	d	i
+edge	i_CLM	i	CLM
+edge	i_j	i	j
+edge	j_k	j	k
+edge	k_l	k	l
+edge	l_HZP	l	HZP
+edge	l_m	l	m
+edge	m_KLS	m	KLS
+edge	m_PEL	m	PEL
+edge	k_n	k	n
+edge	n_o	n	o
+edge	o_ADY	o	ADY
+edge	o_IBS	o	IBS
+edge	n_p	n	p
+edge	p_PTH	p	PTH
+edge	p_MZB	p	MZB
+edge	j_RUS	j	RUS
