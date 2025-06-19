@@ -2,7 +2,7 @@ library("ggplot2")
 library("reshape")
 
 #popnames <- "1KG_MSL_ESN_CDX_JPT_CEU_TSI_CHB"
-setwd("C:/Users/Alicia/Desktop/AntropoGeo")
+setwd("")
 
 table <- read.table("human.tsv",header=TRUE)
 table <- as.data.frame(table)
