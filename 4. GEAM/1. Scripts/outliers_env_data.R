@@ -1,12 +1,12 @@
 # charge functions 
-source("C:/Users/Alicia/Desktop/AntropoGeo/outliers_env_data_functions.R")
+source("./outliers_env_data_functions.R")
 
 ###################################
 ## 1. FILTERING SIGNIFICANT SNPs ##
 ###################################
 
 # open GRoSS results 
-setwd("C:/Users/Alicia/Desktop/AntropoGeo")
+setwd("")
 
 h1 <- read.table("human.tsv", header=T, sep="\t")
 
@@ -68,7 +68,7 @@ for(i in 1:length(frh1_list)){
   colnames(frh1_final)[i + 1] <- colnames(frh1_list[[i]])[2]
 }
 
-write.table(rownames(frh1_final), "SNPs_under_sel.txt", quote = F, col.names = F, row.names = F)
+#write.table(rownames(frh1_final), "SNPs_under_sel.txt", quote = F, col.names = F, row.names = F)
 
 ##################################
 ## 2. ADDING ENVIRONMENTAL DATA ##
@@ -83,7 +83,7 @@ gen1 <- as.data.frame(cbind("pop" = rownames(gen1), gen1)) # as first column pop
 rownames(gen1) <- NULL # remove rownames 
 
 # open environmental data 
-setwd("C:/Users/Alicia/Desktop/AntropoGeo/Env_data")
+setwd("")
 # gen.env = environment of populations in 1000genomes database 
 load("3.environment_1000genomes_populations.RData")
 # sim.env = environment of populations in Simons database
@@ -91,7 +91,7 @@ load("3.environment_simons_populations.RData")
 
 # change 3 letter codes by complete population names in genomic 
 # tables to be able to join to the environmental ones by merge function 
-setwd("C:/Users/Alicia/Desktop/AntropoGeo")
+setwd("")
 corr <- read.table("correspondence_names_populations.txt", header=T, sep="\t")
 
 gen1 <- merge(gen1, corr, by.x="pop", by.y="Code")
@@ -107,7 +107,7 @@ all(gen1$pop %in% sim.env$pop)
 gen1 <- merge(gen1, gen.env, by="pop")
 
 # save complete databases with significant SNPs and environmental data 
-write.csv(gen1, "C:/Users/Alicia/Desktop/AntropoGeo/gen1.csv", row.names=FALSE)
+write.csv(gen1, "./gen1.csv", row.names=FALSE)
 
 # there are too much variables to include in a PCA 
 # make 1000 random subsamples of 5% of the total of SNPs
@@ -134,5 +134,5 @@ for(i in 1 : 1000){
 }
 
 # save random tables (input of GEAM)
-setwd("Master-Thesis-MBC/6. Preparing data for GEAM/Outliers & environmental data/Random subsampling of outliers/")
+setwd("")
 save(gs1, file = "1000_random_SNPs_gen1.RData")
