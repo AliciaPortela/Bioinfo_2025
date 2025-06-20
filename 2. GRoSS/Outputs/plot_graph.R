@@ -1,5 +1,7 @@
-setwd("./2. GRoSS/Inputs")
-#library(igraph)
+library(igraph)
+library(ggplot2)
+
+setwd("./2. GRoSS/Inputs") 
 
 lines <- readLines("human.graph")
 
