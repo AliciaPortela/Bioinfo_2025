@@ -1,16 +1,5 @@
-setwd("C:/Users/Alicia/Desktop/AntropoGeo/Inputs_GRoSS")
-library(igraph)
-
-# Cargar como lista de aristas
-g <- read_graph("human.graph", format = "ncol")  # O "edgelist"
-
-# Plot
-plot(g, vertex.label.cex = 0.8, edge.arrow.size = 0.4)
-
-library(ape)
-
-tree <- read.tree("human.graph")
-plot(tree)
+setwd("./2. GRoSS/Inputs")
+#library(igraph)
 
 lines <- readLines("human.graph")
 
