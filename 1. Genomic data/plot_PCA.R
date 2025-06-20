@@ -1,10 +1,17 @@
 library(ggplot2)
 
+setwd("")
 # Leer tabla de PCA
-pca_data <- read.table("PCA_SNPs_under_sel_pop.txt", header=TRUE, stringsAsFactors = FALSE)
+pca_data <- read.table("PCA_data.txt", header=TRUE, stringsAsFactors = FALSE)
 
-# Graficar PC1 vs PC2 por población
-plot<- ggplot(pca_pop, aes(x=PC1, y=PC2, color=CONTINENT)) +
+# Leer tabla de poblaciones
+pop_data <- read.table("popfile.txt", sep = ",", header=TRUE, stringsAsFactors = FALSE)
+
+# Unir tablas por la columna (IID)
+pca_pop <- left_join(pca_data, pop_data, by = "IID")
+
+# Graficar PC1 vs PC2 por continente
+plot <- ggplot(pca_pop, aes(x=PC1, y=PC2, color=CONTINENT)) +
   geom_point(size=3) +
   theme_minimal() +
   labs(title="PCA_all", x="PC1", y="PC2") +
