@@ -19,4 +19,5 @@ plot <- ggplot(pca_pop, aes(x=PC1, y=PC2, color=CONTINENT)) +
   theme(legend.title = element_text(size=12),
         legend.text = element_text(size=10)) + stat_ellipse()
 
-ggsave("PCA_all.png", plot = plot, width = 12, height = 10, dpi = 300)
+# Guardar el plot
+# ggsave("PCA_all.png", plot = plot, width = 12, height = 10, dpi = 300)
