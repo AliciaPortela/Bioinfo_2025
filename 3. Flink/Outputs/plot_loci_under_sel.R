@@ -1,4 +1,4 @@
-setwd("C:/Users/Alicia/Desktop/AntropoGeo/")
+setwd("./")
 
 
 args <- commandArgs(trailingOnly = TRUE)
