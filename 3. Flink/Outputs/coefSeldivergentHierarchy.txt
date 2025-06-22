@@ -1,0 +1,4 @@
+chr12	1	12	14179218	1	divergent	Hierarchy
+chr12	2	12	20724411	1	divergent	Hierarchy
+chr12	1	12	14179218	1	divergent	Hierarchy
+chr12	2	12	20724411	1	divergent	Hierarchy
