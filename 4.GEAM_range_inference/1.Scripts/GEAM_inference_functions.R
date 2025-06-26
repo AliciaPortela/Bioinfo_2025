@@ -203,3 +203,55 @@ best_GEAM <- function(){
   
   return(out)
 }
+
+# function to plot distribution range
+# needs to be debugged
+GEAM_extremes_plot <- function(ras, label, env.label){
+  
+  # comparing extreme values of rasters with 
+  # the predicted by GEAM and then decide to plot or not:
+  
+  # 1. if they remain inside the raster margins (at least one)...
+  # plot
+  ext_pred <- extremes[extremes$Label == label, 2:3]
+  
+  min_ras <- min(values(ras)[-which(is.na(values(ras)))])
+  max_ras <- max(values(ras)[-which(is.na(values(ras)))])
+  
+  if(min(ext_pred) > min_ras | max(ext_pred) < max_ras){
+    
+    # change to '1000' NAs (NA=sea) to operate 
+    # with them
+    values(ras)[which(is.na(values(ras)))] <- 1000
+    
+    values(ras) <- round(values(ras), digits=6)
+    presences <- which(values(ras) >= min(ext_pred) & values(ras) <= max(ext_pred))
+    
+    # if an environmental value is predicted in the sea, remove it
+    if(any(presences %in% which(values(ras) == 1000))){
+      presences <- presences[-which(presences %in% which(values(ras)==0))]
+    }
+    values(ras)[presences] <- 950
+    values(ras)[! values(ras) %in% c(1000, 950)] <- 500
+    
+    cuts = c(0,600,960,1100) # set breaks for colors
+    pal <- colorRampPalette(c("gray","darkred", "white"))
+    
+    # make and save maps
+    x11()
+    tiff(paste(label, ".tiff", sep=""), units="in", width=15, height=9, res=300)
+    plot(ras, breaks=cuts, col = pal(3), legend=F, main=label, 
+         xlab=paste("from", round(ext_pred[1,1], digits=2),
+                    "to", round(ext_pred[1,2], digits=2)))
+    dev.off()
+    
+  }else{ 
+    
+    # 2. if they remain outside the raster margins, (=prediction occupies all the environment),
+    # the map does not make sense (=all). 
+    # Do not plot it
+    # Message:
+    print("Prediction occupies the whole environment")
+  }
+  
+}
