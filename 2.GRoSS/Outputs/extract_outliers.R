@@ -68,4 +68,5 @@ for(i in 1:length(frh1_list)){
   colnames(frh1_final)[i + 1] <- colnames(frh1_list[[i]])[2]
 }
 
-#write.table(rownames(frh1_final), "SNPs_under_sel.txt", quote = F, col.names = F, row.names = F)
+#write.table(rownames(frh1_final), "SNPs_under_sel.txt", quote = F, col.names = F, row.names = F) # save SNPs under selection list
+#write.table(frh1_final, "frh1_final.tsv", sep= "\t", row.names = F, quote = F) # save table of SNPs under selection along with their allele freq
