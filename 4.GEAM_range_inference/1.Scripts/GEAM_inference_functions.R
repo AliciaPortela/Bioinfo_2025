@@ -105,35 +105,35 @@ best_GEAM_in <- function(res, gs, label){
   }
   
   ### 2.1.2. Temperature & Humidity
-  if(label %in% c("G1EAM_th")){
+  #if(label %in% c("G1EAM_th")){
     
-    table <- table[,-which(colnames(table) %in% c("rad", "ele"))] 
-    full0 <- lm(formula = th ~ ., data = table) 
-    step0 <- stepAIC(full0, direction = "both", trace = FALSE) 
-    names_nosig <- names(which(summary(step0)$coefficients[,4] >= 0.05)) 
+    #table <- table[,-which(colnames(table) %in% c("rad", "ele"))] 
+    #full0 <- lm(formula = th ~ ., data = table) 
+    #step0 <- stepAIC(full0, direction = "both", trace = FALSE) 
+    #names_nosig <- names(which(summary(step0)$coefficients[,4] >= 0.05)) 
     
-    if(length(names_nosig > 0)){ 
-      table <- table[,-which(colnames(table) %in% names_nosig)]
-      full <- lm(formula = th ~ ., data = table)
-    }else{
-      full <- full0
-    }
-  }
+    #if(length(names_nosig > 0)){ 
+     # table <- table[,-which(colnames(table) %in% names_nosig)]
+    #  full <- lm(formula = th ~ ., data = table)
+    #}else{
+     # full <- full0
+    #}
+  #}
   
   ### 2.1.3. Elevation
-  if(label %in% c("G1EAM_ele")){
+  #if(label %in% c("G1EAM_ele")){
     
-    table <- table[,-which(colnames(table) %in% c("th", "rad"))]
-    full0 <- lm(formula = ele ~ ., data = table)
-    step0 <- stepAIC(full0, direction = "both", trace = FALSE)
-    names_nosig <- names(which(summary(step0)$coefficients[,4] >= 0.05))
-    if(length(names_nosig > 0)){
-      table <- table[,-which(colnames(table) %in% names_nosig)]
-      full <- lm(formula = ele ~ ., data = table)
-    }else{
-      full <- full0
-    }
-  }
+   # table <- table[,-which(colnames(table) %in% c("th", "rad"))]
+    #full0 <- lm(formula = ele ~ ., data = table)
+    #step0 <- stepAIC(full0, direction = "both", trace = FALSE)
+    #names_nosig <- names(which(summary(step0)$coefficients[,4] >= 0.05))
+    #if(length(names_nosig > 0)){
+     # table <- table[,-which(colnames(table) %in% names_nosig)]
+      #full <- lm(formula = ele ~ ., data = table)
+    #}else{
+     # full <- full0
+    #}
+  #}
   
   ## 2.2. Run Stepwise Regression for the previous model (full) 
   step <- stepAIC(full, direction = "both", trace = FALSE) 
@@ -161,10 +161,10 @@ best_GEAM_in <- function(res, gs, label){
 best_GEAM <- function(){
   
   # create empty table to save the results 
-  results <- as.data.frame(matrix(ncol=5, nrow=3)) 
+  results <- as.data.frame(matrix(ncol=5, nrow=1)) 
   colnames(results) <- c("Label", "AIC", "p_value", "adj_R_sq", "SNPs>0.05") # save information except from coefficients 
   # (saved in tables with the "best_GEAM_in" function)
-  results$Label <- c("G1EAM_rad", "G1EAM_th", "G1EAM_ele")
+  results$Label <- c("G1EAM_rad")
   
   # create empty list to save the coefficients tables 
   coeffs <- list()
@@ -182,22 +182,22 @@ best_GEAM <- function(){
   names(coeffs)[1] <- "G1EAM_rad" 
   
   ## G1EAM ~ Temperature & Humidity
-  geam <- best_GEAM_in(res, gs1, "G1EAM_th")
-  results[results$Label=="G1EAM_th", "AIC"] <- geam$best_AIC
-  results[results$Label=="G1EAM_th", "p_value"] <- geam$p_value
-  results[results$Label=="G1EAM_th", "adj_R_sq"] <- geam$adj_R_sq
-  results[results$Label=="G1EAM_th", "SNPs>0.05"] <- length(geam[[4]])
-  coeffs[[2]] <- geam$Coeffs.
-  names(coeffs)[2] <- "G1EAM_th"
+ # geam <- best_GEAM_in(res, gs1, "G1EAM_th")
+  #results[results$Label=="G1EAM_th", "AIC"] <- geam$best_AIC
+  #results[results$Label=="G1EAM_th", "p_value"] <- geam$p_value
+  #results[results$Label=="G1EAM_th", "adj_R_sq"] <- geam$adj_R_sq
+  #results[results$Label=="G1EAM_th", "SNPs>0.05"] <- length(geam[[4]])
+  #coeffs[[2]] <- geam$Coeffs.
+  #names(coeffs)[2] <- "G1EAM_th"
   
   ## G1EAM ~ Elevation
-  geam <- best_GEAM_in(res, gs1, "G1EAM_ele")
-  results[results$Label=="G1EAM_ele", "AIC"] <- geam$best_AIC
-  results[results$Label=="G1EAM_ele", "p_value"] <- geam$p_value
-  results[results$Label=="G1EAM_ele", "adj_R_sq"] <- geam$adj_R_sq
-  results[results$Label=="G1EAM_ele", "SNPs>0.05"] <- length(geam[[4]])
-  coeffs[[3]] <- geam$Coeffs.
-  names(coeffs)[3] <- "G1EAM_ele"
+  #geam <- best_GEAM_in(res, gs1, "G1EAM_ele")
+  #results[results$Label=="G1EAM_ele", "AIC"] <- geam$best_AIC
+  #results[results$Label=="G1EAM_ele", "p_value"] <- geam$p_value
+  #results[results$Label=="G1EAM_ele", "adj_R_sq"] <- geam$adj_R_sq
+  #results[results$Label=="G1EAM_ele", "SNPs>0.05"] <- length(geam[[4]])
+  #coeffs[[3]] <- geam$Coeffs.
+  #names(coeffs)[3] <- "G1EAM_ele"
   
   out <- list("Coeffs" = coeffs, "table" = results)
   
