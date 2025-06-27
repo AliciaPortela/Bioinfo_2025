@@ -90,7 +90,7 @@ best_GEAM_in <- function(res, gs, label){
   ### 2.1.1. Radiation
   if(label %in% c("G1EAM_rad")){
     
-    table <- table[,-which(colnames(table) %in% c("th", "ele"))] # remove th and ele environmental variables
+   # table <- table[,-which(colnames(table) %in% c("th", "ele"))] # remove th and ele environmental variables
     full0 <- lm(formula = rad ~ ., data = table) # create the multiple linear regression model for that input table 
     step0 <- stepAIC(full0, direction = "both", trace = FALSE) # stepwise regression for the previous model 
     names_nosig <- names(which(summary(step0)$coefficients[,4] >= 0.05)) # get the names of non-significant SNPs
